@@ -1,29 +1,33 @@
 "use client";
 
-import { Target, Users, Code, Rocket } from "lucide-react";
+import { Calendar, Users, Globe, Sparkles } from "lucide-react";
 import Card from "@/components/ui/Card";
 import { motion } from "framer-motion";
 
 const values = [
   {
-    icon: Target,
-    title: "Open Innovation",
-    description: "We believe in transparent development and collaborative problem-solving.",
+    icon: Calendar,
+    title: "Easy Event Discovery",
+    description:
+      "Helping people find relevant tech events, hackathons, and meetups in one place without the noise.",
   },
   {
     icon: Users,
-    title: "Community First",
-    description: "Building a supportive ecosystem where everyone can learn and contribute.",
+    title: "Community Driven",
+    description:
+      "We focus on bringing developers, students, and organizers together to learn, collaborate, and grow.",
   },
   {
-    icon: Code,
-    title: "Quality Code",
-    description: "Maintaining high standards while making development accessible to all.",
+    icon: Globe,
+    title: "Open for Everyone",
+    description:
+      "Whether you're hosting your first meetup or a large hackathon, our platform makes event management simple.",
   },
   {
-    icon: Rocket,
-    title: "Impact Driven",
-    description: "Creating tools and solutions that make a real difference in developers' lives.",
+    icon: Sparkles,
+    title: "Meaningful Experiences",
+    description:
+      "We aim to support events that create real value through learning, networking, and hands-on building.",
   },
 ];
 
@@ -31,6 +35,7 @@ export default function Mission() {
   return (
     <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
         {/* Mission Statement */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -42,9 +47,12 @@ export default function Mission() {
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
             Our Mission
           </h2>
+
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            To empower developers worldwide by creating innovative open-source solutions,
-            fostering a collaborative community, and making technology accessible to everyone.
+            Our mission is to make discovering and hosting events simple and accessible. 
+            We aim to connect communities, empower organizers, and help people participate 
+            in meaningful tech events. From small meetups to large hackathons, we provide 
+            a platform where ideas grow, people connect, and innovation happens.
           </p>
         </motion.div>
 
@@ -64,9 +72,11 @@ export default function Mission() {
                   <div className="inline-flex items-center justify-center w-16 h-16 bg-primary-100 text-primary-600 rounded-2xl mb-4">
                     <Icon size={32} />
                   </div>
+
                   <h3 className="text-xl font-bold text-gray-900 mb-3">
                     {value.title}
                   </h3>
+
                   <p className="text-gray-600">
                     {value.description}
                   </p>

@@ -5,76 +5,91 @@ import Card from "@/components/ui/Card";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "About Us - DevRhylme Foundation",
-  description: "Learn about DevRhylme Foundation's mission, vision, and the team behind our open-source initiatives.",
+  title: "About Us - DevRhylme",
+  description:
+    "DevRhylme is a Section 8 registered organization building an event listing and management platform.",
 };
 
 const milestones = [
   {
-    year: "2020",
-    title: "Foundation Established",
-    description: "DevRhylme Foundation was founded with a vision to democratize technology through open source.",
-  },
-  {
-    year: "2021",
-    title: "First Major Project",
-    description: "Launched our first flagship project that gained 1000+ stars on GitHub.",
-  },
-  {
-    year: "2022",
-    title: "Community Growth",
-    description: "Reached 100+ active contributors and hosted our first annual conference.",
-  },
-  {
-    year: "2023",
-    title: "Global Impact",
-    description: "Expanded to 50+ projects with contributors from 30+ countries worldwide.",
+    year: "2024",
+    title: "Organization Registered",
+    description:
+      "DevRhylme was established as a Section 8 registered organization focused on open-source collaboration and community initiatives.",
   },
   {
     year: "2024",
-    title: "Innovation Hub",
-    description: "Established partnerships with leading tech companies and educational institutions.",
+    title: "Open Source Community",
+    description:
+      "Started as an open-source organization bringing developers and communities together.",
+  },
+  {
+    year: "2024",
+    title: "First Events Hosted",
+    description:
+      "Hosted initial hackathons, workshops, and community-driven tech events.",
+  },
+  {
+    year: "2026",
+    title: "Event Listing Platform",
+    description:
+      "Launched DevRhylme event listing and management platform for organizers.",
+  },
+  {
+    year: "2026",
+    title: "Growing Ecosystem",
+    description:
+      "Expanded partnerships and started managing multiple events and communities.",
   },
 ];
 
 const coreValues = [
   {
     icon: Target,
-    title: "Transparency",
-    description: "We believe in open communication and transparent decision-making processes.",
+    title: "Community First",
+    description:
+      "We focus on building strong communities through meaningful events.",
   },
   {
     icon: Users,
     title: "Collaboration",
-    description: "Building together is better. We foster a culture of teamwork and mutual support.",
+    description:
+      "Connecting organizers, developers, and communities together.",
   },
   {
     icon: Globe,
     title: "Accessibility",
-    description: "Making technology accessible to everyone, regardless of background or location.",
+    description:
+      "Making event discovery and participation accessible to everyone.",
   },
   {
     icon: Heart,
-    title: "Community",
-    description: "Our community is our strength. We prioritize inclusivity and diversity.",
+    title: "Impact Driven",
+    description:
+      "Creating opportunities that bring real value to the ecosystem.",
   },
 ];
 
 export default function AboutPage() {
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
+
+      {/* Hero */}
       <section className="bg-gradient-to-br from-primary-50 via-white to-blue-50 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
+
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              About DevRhylme Foundation
+              About DevRhylme
             </h1>
+
             <p className="text-xl text-gray-600 leading-relaxed">
-              We are a community-driven organization dedicated to creating impactful 
-              open-source solutions that empower developers worldwide and make 
-              technology accessible to everyone.
+              DevRhylme is a Section 8 registered organization established in 2024.
+              We started as an open-source community and now operate an event listing
+              and management platform that helps organizers host events and enables
+              communities to discover meaningful opportunities.
             </p>
+
           </div>
         </div>
       </section>
@@ -82,19 +97,23 @@ export default function AboutPage() {
       {/* Mission & Vision */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
           <div className="grid md:grid-cols-2 gap-12">
+
             <Card className="p-8">
               <div className="w-16 h-16 bg-primary-100 text-primary-600 rounded-2xl flex items-center justify-center mb-6">
                 <Target size={32} />
               </div>
+
               <h2 className="text-2xl font-bold text-gray-900 mb-4">
                 Our Mission
               </h2>
+
               <p className="text-gray-600 leading-relaxed">
-                To empower developers worldwide by creating innovative open-source 
-                solutions, fostering a collaborative community, and making technology 
-                accessible to everyone. We strive to build tools that solve real-world 
-                problems and create opportunities for learning and growth.
+                To empower communities by providing a platform for discovering,
+                hosting, and managing events. We aim to support organizers and
+                connect participants through hackathons, workshops, and
+                community-driven initiatives.
               </p>
             </Card>
 
@@ -102,16 +121,18 @@ export default function AboutPage() {
               <div className="w-16 h-16 bg-primary-100 text-primary-600 rounded-2xl flex items-center justify-center mb-6">
                 <Globe size={32} />
               </div>
+
               <h2 className="text-2xl font-bold text-gray-900 mb-4">
                 Our Vision
               </h2>
+
               <p className="text-gray-600 leading-relaxed">
-                To be a leading force in the open-source ecosystem, where innovation 
-                meets collaboration. We envision a world where technology is truly 
-                open and accessible, and where every developer has the opportunity to 
-                contribute to meaningful projects that impact millions of lives.
+                To become a leading event ecosystem where communities,
+                organizations, and developers collaborate through impactful
+                events and shared learning experiences.
               </p>
             </Card>
+
           </div>
         </div>
       </section>
@@ -119,12 +140,14 @@ export default function AboutPage() {
       {/* Core Values */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               Our Core Values
             </h2>
+
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              These principles guide everything we do and shape our community culture.
+              Principles that guide our platform and community.
             </p>
           </div>
 
@@ -136,9 +159,11 @@ export default function AboutPage() {
                   <div className="inline-flex items-center justify-center w-14 h-14 bg-primary-100 text-primary-600 rounded-xl mb-4">
                     <Icon size={28} />
                   </div>
+
                   <h3 className="text-lg font-bold text-gray-900 mb-3">
                     {value.title}
                   </h3>
+
                   <p className="text-gray-600 text-sm">
                     {value.description}
                   </p>
@@ -146,105 +171,93 @@ export default function AboutPage() {
               );
             })}
           </div>
+
         </div>
       </section>
 
       {/* Timeline */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               Our Journey
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              From humble beginnings to a thriving global community.
-            </p>
           </div>
 
           <div className="relative">
-            {/* Timeline Line */}
+
             <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-primary-200"></div>
 
             <div className="space-y-12">
               {milestones.map((milestone, index) => (
                 <div
-                  key={milestone.year}
+                  key={index}
                   className={`relative flex items-center ${
                     index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
                   }`}
                 >
-                  {/* Content */}
                   <div className="w-full md:w-5/12">
                     <Card className={`p-6 ${index % 2 === 0 ? "md:mr-8" : "md:ml-8"}`}>
                       <div className="text-primary-600 font-bold text-sm mb-2">
                         {milestone.year}
                       </div>
+
                       <h3 className="text-xl font-bold text-gray-900 mb-2">
                         {milestone.title}
                       </h3>
+
                       <p className="text-gray-600">
                         {milestone.description}
                       </p>
                     </Card>
                   </div>
 
-                  {/* Center Dot */}
                   <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-primary-600 rounded-full border-4 border-white shadow-lg"></div>
 
-                  {/* Spacer */}
                   <div className="hidden md:block w-5/12"></div>
                 </div>
               ))}
             </div>
+
           </div>
+
         </div>
       </section>
 
-      {/* Team Preview */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Meet Our Team
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Passionate individuals working together to make open source accessible to everyone.
-            </p>
-          </div>
-
-          <div className="text-center">
-            <Link href="/team">
-              <Button size="lg">
-                View Full Team
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
+      {/* CTA */}
       <section className="py-20 bg-primary-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Want to Be Part of Our Story?
+            Join Our Journey
           </h2>
+
           <p className="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
-            Join our community and help us build the future of open source.
+            Discover events, host your own, and grow with the DevRhylme community.
           </p>
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/community">
+            <Link href="/events">
               <Button size="lg" variant="secondary">
+                Browse Events
+              </Button>
+            </Link>
+
+            <Link href="/community">
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-white text-white hover:bg-white/10"
+              >
                 Join Community
               </Button>
             </Link>
-            <Link href="/contact">
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
-                Contact Us
-              </Button>
-            </Link>
           </div>
+
         </div>
       </section>
+
     </div>
   );
 }

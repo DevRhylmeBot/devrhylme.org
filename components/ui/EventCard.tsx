@@ -1,118 +1,130 @@
-import { Calendar, MapPin, Clock, ExternalLink } from "lucide-react";
-import Card from "./Card";
-import Button from "./Button";
-import { Event } from "@/lib/type";
-import { formatDate } from "@/lib/utils";
+"use client";
+
+import { useState, useEffect } from "react";
+import { Calendar, MapPin, Users } from "lucide-react";
+import { Event } from "@/lib/firebase/services";
+import RegistrationModal from "./RegistrationModal";
 
 interface EventCardProps {
   event: Event;
+  onRegistrationSuccess?: () => void;
 }
 
-export default function EventCard({ event }: EventCardProps) {
-  const getStatusColor = (status: Event["status"]) => {
-    switch (status) {
-      case "upcoming":
-        return "bg-blue-100 text-blue-800";
-      case "ongoing":
-        return "bg-green-100 text-green-800";
-      case "completed":
-        return "bg-gray-100 text-gray-800";
-      default:
-        return "bg-gray-100 text-gray-800";
-    }
-  };
+// Helper: Check if registration is cached
+const isRegistrationCached = (eventId: string, email: string = ""): boolean => {
+  // For anonymous users, check all cached registrations for this event
+  const keys = Object.keys(localStorage);
+  return keys.some(key => key.startsWith(`registered_${eventId}`));
+};
 
-  const getTypeColor = (type: Event["type"]) => {
-    switch (type) {
-      case "online":
-        return "bg-purple-100 text-purple-800";
-      case "offline":
-        return "bg-orange-100 text-orange-800";
-      case "hybrid":
-        return "bg-indigo-100 text-indigo-800";
-      default:
-        return "bg-gray-100 text-gray-800";
+export default function EventCard({ event, onRegistrationSuccess }: EventCardProps) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isUserRegistered, setIsUserRegistered] = useState(false);
+
+  useEffect(() => {
+    // Check if any registration cached for this event
+    setIsUserRegistered(isRegistrationCached(event.id));
+  }, [event.id]);
+
+  const handleRegistrationSuccess = () => {
+    setIsUserRegistered(true);
+    if (onRegistrationSuccess) {
+      onRegistrationSuccess();
     }
   };
 
   return (
-    <Card hover className="overflow-hidden h-full flex flex-col">
-      {/* Event Image Placeholder */}
-      <div className="w-full h-48 bg-gradient-to-br from-primary-100 to-primary-200 flex items-center justify-center relative">
-        <div className="text-4xl font-bold text-primary-600">
-          {event.title.split(' ').slice(0, 2).map(w => w[0]).join('')}
-        </div>
-        <div className="absolute top-4 right-4 flex gap-2">
-          <span className={`${getStatusColor(event.status)} text-xs font-semibold px-3 py-1 rounded-full capitalize`}>
-            {event.status}
-          </span>
-          <span className={`${getTypeColor(event.type)} text-xs font-semibold px-3 py-1 rounded-full capitalize`}>
-            {event.type}
-          </span>
-        </div>
-      </div>
+    <>
+      <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow h-full flex flex-col">
+        {/* Image */}
+        {event.image && (
+          <div className="w-full h-48 bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center">
+            <img
+              src={event.image}
+              alt={event.title}
+              className="w-full h-full object-cover"
+            />
+          </div>
+        )}
 
-      {/* Content */}
-      <div className="p-6 flex flex-col flex-grow">
-        <h3 className="text-xl font-bold text-gray-900 mb-3">
-          {event.title}
-        </h3>
-
-        <p className="text-gray-600 mb-4 flex-grow">
-          {event.description}
-        </p>
-
-        {/* Event Details */}
-        <div className="space-y-2 mb-4">
-          <div className="flex items-start text-sm text-gray-600">
-            <Calendar size={16} className="mr-2 mt-0.5 flex-shrink-0" />
-            <span>
-              {formatDate(event.date)}
-              {event.endDate && ` - ${formatDate(event.endDate)}`}
+        {/* Content */}
+        <div className="p-6 flex flex-col flex-grow">
+          {/* Type Badge */}
+          <div className="mb-3">
+            <span className="inline-block bg-primary-100 text-primary-700 text-xs font-semibold px-3 py-1 rounded-full capitalize">
+              {event.type}
             </span>
           </div>
 
-          <div className="flex items-start text-sm text-gray-600">
-            <MapPin size={16} className="mr-2 mt-0.5 flex-shrink-0" />
-            <span>{event.location}</span>
-          </div>
-        </div>
+          {/* Title */}
+          <h3 className="text-xl font-bold text-gray-900 mb-2 line-clamp-2">
+            {event.title}
+          </h3>
 
-        {/* Tags */}
-        <div className="flex flex-wrap gap-2 mb-4">
-          {event.tags.map((tag) => (
+          {/* Description */}
+          <p className="text-gray-600 text-sm mb-4 flex-grow line-clamp-3">
+            {event.description}
+          </p>
+
+          {/* Event Details */}
+          <div className="space-y-2 mb-4 text-sm text-gray-600">
+            <div className="flex items-center gap-2">
+              <Calendar size={16} />
+              <span>{event.date}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Calendar size={16} />
+              <span>{event.time}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <MapPin size={16} />
+              <span className="line-clamp-1">{event.location}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Users size={16} />
+              <span>
+                {event.attendeeCount || event.registeredCount || 0}/{event.capacity} Registered
+              </span>
+            </div>
+          </div>
+
+          {/* Status Badge */}
+          <div className="mb-4">
             <span
-              key={tag}
-              className="bg-gray-100 text-gray-700 text-xs font-medium px-2 py-1 rounded"
+              className={`inline-block text-xs font-semibold px-3 py-1 rounded-full capitalize ${
+                event.status === "upcoming"
+                  ? "bg-green-100 text-green-700"
+                  : event.status === "ongoing"
+                  ? "bg-blue-100 text-blue-700"
+                  : "bg-gray-100 text-gray-700"
+              }`}
             >
-              {tag}
+              {event.status}
             </span>
-          ))}
-        </div>
-
-        {/* Action Button */}
-        {event.status !== "completed" && event.registrationUrl && (
-          <a
-            href={event.registrationUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-auto"
-          >
-            <Button className="w-full">
-              Register Now
-              <ExternalLink size={16} className="ml-2" />
-            </Button>
-          </a>
-        )}
-
-        {event.status === "completed" && (
-          <div className="mt-auto">
-            <Button variant="outline" className="w-full" disabled>
-              Event Completed
-            </Button>
           </div>
-        )}
+
+          {/* Register Button */}
+          <button
+            onClick={() => setIsModalOpen(true)}
+            disabled={event.status === "completed" || isUserRegistered}
+            className="w-full bg-primary-600 hover:bg-primary-700 disabled:bg-gray-400 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
+          >
+            {event.status === "completed" 
+              ? "Event Ended" 
+              : isUserRegistered 
+              ? "✓ Registered" 
+              : "Register Now"}
+          </button>
+        </div>
       </div>
-    </Card>
+
+      {/* Registration Modal */}
+      <RegistrationModal
+        event={event}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSuccess={handleRegistrationSuccess}
+      />
+    </>
   );
 }

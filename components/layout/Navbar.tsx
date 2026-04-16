@@ -9,12 +9,9 @@ import Image from "next/image";
 const navItems = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
-  { name: "Projects", href: "/projects" },
   { name: "Team", href: "/team" },
   { name: "Events", href: "/events" },
   { name: "Community", href: "/community" },
-  { name: "Docs", href: "/docs" },
-  { name: "Partners", href: "/partners" },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -63,15 +60,6 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* CTA Button - Desktop */}
-          <div className="hidden lg:flex items-center space-x-4">
-            <Link
-              href="/contact"
-              className="px-6 py-2 text-sm font-semibold text-white bg-blue-600 rounded-full hover:shadow-lg hover:shadow-blue-500/50 transition-all duration-300 hover:scale-105"
-            >
-              Get Started
-            </Link>
-          </div>
 
           {/* Mobile menu button */}
           <button
@@ -100,13 +88,7 @@ export default function Navbar() {
                   {item.name}
                 </Link>
               ))}
-              <Link
-                href="/contact"
-                onClick={() => setIsOpen(false)}
-                className="mx-4 mt-4 px-6 py-3 text-sm font-semibold text-center text-white bg-blue-600 rounded-full hover:shadow-lg transition-all"
-              >
-                Get Started
-              </Link>
+            
             </div>
           </div>
         )}
