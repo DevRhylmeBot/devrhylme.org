@@ -5,7 +5,6 @@ import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 import { Calendar, MapPin, Users, ExternalLink } from "lucide-react";
 import { motion } from "framer-motion";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import { collection, query, orderBy, limit, onSnapshot } from "firebase/firestore";
 import { db } from "@/lib/firebase/config";
@@ -46,7 +45,7 @@ export default function FeaturedEvents() {
             date: data.date,
             time: data.time,
             location: data.location,
-            image: data.image || "https://substackcdn.com/image/fetch/$s_!6bCj!,w_170,c_limit,f_auto,q_auto:best,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F135e8716-8389-4190-b2a5-32dbde9374a5_500x500.png",
+            image: data.image || "/image.png",
             registeredCount: data.registeredCount || 0,
             capacity: data.capacity || 0,
           });
@@ -100,14 +99,18 @@ export default function FeaturedEvents() {
               <Card hover className="overflow-hidden h-full flex flex-col">
                 
                 {/* Image */}
-                <div className="relative h-48 w-full">
-                  <Image
-                    src={event.image!}
-                    alt={event.title}
-                    fill
-                    sizes="(max-width:768px) 100vw, 33vw"
-                    className="object-cover"
-                  />
+                <div className="relative h-48 w-full bg-gradient-to-br from-gray-200 to-gray-300">
+                  {event.image ? (
+                    <img
+                      src={event.image}
+                      alt={event.title}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-gray-400">
+                      No image
+                    </div>
+                  )}
                 </div>
 
                 {/* Content */}
